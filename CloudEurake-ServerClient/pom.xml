@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>spring-cloud-fast</artifactId>
+        <groupId>com.dyy.spring</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>CloudEurake-ServerClient</artifactId>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>l.8</java.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- Dyy 2018/8/17 上午11:55 springboot 2.x的pom-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+
+        <!-- Dyy 2018/8/17 上午2:42 springboot 1.X 的pom-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-eureka-server</artifactId>-->
+        <!--</dependency>-->
+
+        <!-- Dyy 2018/8/17 上午12:32 spring-boot引入web的引入-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- Dyy 2018/8/17 上午12:31 spring-test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- 1.Dyy 2018/8/17 上午12:30 spring-boot的监控器-->
+        <!-- 2.Dyy 2018/8/17 上午12:35 引入了该pom之后会多一些mapped配置 多了一些监控点-->
+        <!-- 3.Dyy 2018/8/17 上午12:36 该pom借助的是web的pom配置-->
+        <!-- 4.Dyy 2018/8/17 上午1:05
+            【1】/headth 内存状态
+            【2】/autoconfig 自动配置
+            【3】/beans 应用上下文中的beans
+            【4】/configprops应用中配置信息
+            【5】/mappings 方法对应
+            【6】/metrics 重要度量指标，比如内存信息
+            【7】/dump 用来暴露程序运行中的线程信息
+            -->
+        <dependency>
+            <groupId> org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

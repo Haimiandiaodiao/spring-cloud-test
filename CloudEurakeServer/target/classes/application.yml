@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: Eureka
+#----------------------------------------------------
+#6.可自定义属性使用@Value("${book.name}")在属性上，并且提供属性的setter方法
+book:
+  name: springboot
+  author: Dyy
+  desc: ${book.name} is writer ${book.author}
+#7.使用随机数random.int(10)
+  page: ${random.long[1,50]}
+
+#8.可是使用命令行参数的形式java -jar xxx.jar --server.part= 8888可以使用命令行参数
+worker:
+  id:
+
+---
+spring:
+  profiles: eureka1
+  security:
+    user:
+      name: Dyy
+      password: 123456
+server:
+  port: 8001
+eureka:
+  instance:
+    prefer-ip-address: true
+#    hostname: peer1
+  client:
+    serviceUrl:
+      defaultZone: http://Dyy:123456@peer2:8002/eureka/,http://Dyy:123456@peer3:8003/eureka/
+    fetchRegistry: true
+    registerWithEureka: true
+---
+spring:
+  profiles: eureka2
+  security:
+    user:
+      name: Dyy
+      password: 123456
+server:
+  port: 8002
+eureka:
+  instance:
+    prefer-ip-address: true
+#    hostname: peer2
+  client:
+    serviceUrl:
+      defaultZone: http://Dyy:123456@peer1:8001/eureka/,http://Dyy:123456@peer3:8003/eureka/
+    fetchRegistry: true
+    registerWithEureka: true
+---
+spring:
+ profiles: eureka3
+ security:
+   user:
+     name: Dyy
+     password: 123456
+server:
+ port: 8003
+eureka:
+ instance:
+   prefer-ip-address: true
+#   hostname: peer3
+ client:
+   serviceUrl:
+     defaultZone: http://Dyy:123456@peer2:8002/eureka/,http://Dyy:123456@peer1:8001/eureka/
+   fetchRegistry: true
+   registerWithEureka: true

@@ -1,0 +1,28 @@
+server:
+  port: 7000
+  servlet:
+    context-path: /eurakeClient
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: eurekaClient-test
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    #参数用于定义服 务续约任务的调用间隔时间，默认为30秒
+    lease-renewal-interval-in-seconds: 30
+    #参数用于定义服务失效的时间， 默认为90秒
+    lease-expiration-duration-in-seconds: 90
+  client:
+  # Eureka Server会维护 一 份只读的服务清单来返回给客户端，同时该缓存清单会每隔30秒更新 一 次
+  #获取服务是服务消费者的基础，所以必须确保 下面的参数是true
+    fetch-registry: true
+  #若希望修改缓存清单的 更新时间，可 以通过虾米那参数默认是 30秒
+  #在ribbon中会默认采用轮询的方式进行调用，从而实现客户端的负载均#衡
+    registry-fetch-interval-seconds: 30
+    service-url:
+#1.注意当eureka的服务的有context-path的时候一定要把context-path加上
+      defaultZone: http://127.0.0.1:8001/eureka/,http://127.0.0.1:8002/eureka/

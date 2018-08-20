@@ -1,0 +1,20 @@
+server:
+  port: 7000
+  servlet:
+    context-path: /eurakeClient
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  application:
+    name: eurekaClient-test
+
+eureka:
+ 
+  client:
+    fetch-registry: false
+    service-url:
+#1.注意当eureka的服务的有context-path的时候一定要把context-path加上
+      defaultZone: http://127.0.0.1:8001/eureka/,http://127.0.0.1:8002/eureka/
+
+

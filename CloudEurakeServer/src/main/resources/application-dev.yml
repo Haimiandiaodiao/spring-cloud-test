@@ -1,0 +1,68 @@
+#1.设置服务器的端口号是8000
+#2.设置程序的名字为  contextPath
+server:
+    port: 8000
+    servlet:
+      #2.0的配置
+      context-path: /dev
+    tomcat:
+      uri-encoding: utf-8
+
+
+#3.设置日志的级别
+#4.该名字会被用到springCloud的注册服务名称
+spring:
+  application:
+    name: Eureka-Server-1
+  profiles: eureka1
+  security:
+    user:
+      name: admin
+      password: 123456
+#!!!5.application-test.yml application-dev.yml使用spring: profiles:test可以设置使用的是哪个配置文件
+
+#------------------------------------------------------
+#-----------------------------设置监视器的服务------------
+
+#!!!12.监视器的路径http://localhost:8099/actuator/health
+#服务正常的请求地址 http://localhost:8000/dev/first
+#正常和监控服务器 是启动了连个服务器
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+  server:
+    port: 8099
+
+#----------------------------------------------------
+#6.可自定义属性使用@Value("${book.name}")在属性上，并且提供属性的setter方法
+book:
+  name: springboot
+  author: Dyy
+  desc: ${book.name} is writer ${book.author}
+#7.使用随机数random.int(10)
+  page: ${random.long[1,50]}
+
+#8.可是使用命令行参数的形式java -jar xxx.jar --server.part= 8888可以使用命令行参数
+worker:
+  id:
+
+#9.启动的时候设置 --spring.profiles.active=dev 可以在启动的时候启用application-dev.yml配置
+
+#10.设置查看spring-boot查看属性无安全检测 设置false是无安全检测
+
+
+#-----------------------------------------------------------------------------
+#===============================================第二部分Eureka配置==============
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+#13.由于该应用为注册中心，所以设置为 false, 代表不向注册中心注册自己
+    registerWithEureka: true
+#14.由于注册中心的职责就是维护服务实例，它并不需要去检索服务，所以也设置为 false
+    fetchRegistry: true
+#11.这个是注册中心的地址
+    defaultZone: http://${eureka.instance.hostname}:8001/eureka/
+#!!!!12.控制台页面地址 http://localhost:8000/dev/就是springboot地址的根目录
